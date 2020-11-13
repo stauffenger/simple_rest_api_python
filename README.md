@@ -15,13 +15,13 @@ It'll format the data to pass for the library API.
     - Delete
 
 ## Books model
-``
+```JSON
 {
     "title": "book title",
     "author": "author name",
     "description": "short book description"
 }
-``
+```
 
 ## How to start the project
 
