@@ -1,7 +1,7 @@
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_cors import CORS
-from router import Book, AllBooks
+from controllers.controller import Book, AllBooks
   
 app = Flask(__name__) 
 api = Api(app)

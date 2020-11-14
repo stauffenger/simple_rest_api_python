@@ -18,7 +18,7 @@ def add_new_book(new_book):
         books = get_all_books()
         new_book_formatted = json.loads(new_book)
         books.append(new_book_formatted)
-        with open("my_library.json", "w+") as library:
+        with open("./database/my_library.json", "w+") as library:
             json.dump(books, library, indent=4)
             http_status_code = 201
             message = { "message": "Created." }
@@ -26,7 +26,7 @@ def add_new_book(new_book):
     return message, http_status_code
 
 def get_all_books():
-    with open("my_library.json") as library:
+    with open("./database/my_library.json") as library:
         file_is_empty = check_if_empty(library)
         books_found = False
         if not file_is_empty:
@@ -43,7 +43,7 @@ def update_book(target_book, new_data):
             if book['id'] == book_found['id']:
                 index = books.index(book)
                 books[index] = new_data_formatted
-        with open("my_library.json", "w+") as library:
+        with open("./database/my_library.json", "w+") as library:
             json.dump(books, library, indent=4)
             http_status_code = 204
         library.close()
@@ -52,7 +52,7 @@ def update_book(target_book, new_data):
     return {}, http_status_code
 
 def get_book(target_book):
-    with open("my_library.json") as library:
+    with open("./database/my_library.json") as library:
         file_is_empty = check_if_empty(library)
         target_book_formatted = json.loads(target_book)
         book_found = False
@@ -69,7 +69,7 @@ def delete_book(target_book):
     if book_found:
         books = get_all_books()
         books.remove(book_found)
-        with open("my_library.json", "w+") as library:
+        with open("./database/my_library.json", "w+") as library:
             json.dump(books, library, indent=4)
             http_status_code = 204
         library.close()

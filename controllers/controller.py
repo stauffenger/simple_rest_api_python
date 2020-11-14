@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from flask_restful import Resource
-from book import get, update, delete
-from all_books import insert, get_all
+from services.book_services import insert, get_all, get, update, delete
+
 class Book(Resource):
     def get(self, author, title): 
         book = get(author, title)
