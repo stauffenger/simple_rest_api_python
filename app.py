@@ -12,7 +12,7 @@ api.add_resource(Book, '/book/<string:author>/<string:title>')
 
 @app.route('/<path:string>', methods=['POST', 'GET', 'PATCH', 'DELETE']) 
 def default_message_for_wrong_paths(string): 
-    return jsonify({'message': "Forbidden"}), 403
+    return jsonify({ "message": "Forbidden" }), 403
   
   
 # driver function 
