@@ -1,19 +1,19 @@
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask_restful import Resource
 from book import get, update, delete
 from all_books import insert, get_all
 class Book(Resource):
-    def get(self, target_author, target_title): 
-        book = get(target_author, target_title)
+    def get(self, author, title): 
+        book = get(author, title)
         return book
     
-    def patch(self, target_author, target_title):
+    def patch(self, author, title):
         new_data= request.get_json()
-        response = update(target_author, target_title, new_data)
+        response = update(author, title, new_data)
         return response
     
-    def delete(self, target_author, target_title):
-        response = delete(target_author, target_title)
+    def delete(self, author, title):
+        response = delete(author, title)
         return response
 
 class AllBooks(Resource):
