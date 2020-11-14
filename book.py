@@ -9,27 +9,26 @@ def get(author, title):
     if title_is_not_empty:
         if author_is_not_empty:
             formatted_book = json.dumps(Book(title, author, description="").__dict__)
-            book, http_status_code = get_book(formatted_book)
-            if http_status_code == 404:
+            book = get_book(formatted_book)
+            if book:
+                return book
+            else:
                 error_message = "The book was not found."
                 raise NotFound(description=error_message)
-            elif http_status_code != 200:
-                error_message = "An internal error has occurred trying to get the book on the database."
-                raise InternalServerError(description=error_message)
         else:
             error_message = "The author is required."
             raise BadRequest(description=error_message)
     else:
         error_message = "The title is required."
         raise BadRequest(description=error_message)
-    return book, http_status_code
 
 def update(author, title, new_data):
-    target_book, http_status_code = get(author, title)
-    target_book_found = target_book and http_status_code == 200
+    target_book = get(author, title)
+    target_book_found = target_book
     if target_book_found:
         new_data_formatted = json.dumps(Book(new_data['title'], new_data['author'], new_data['description']).__dict__)
-        response, http_status_code = update_book(target_book, new_data_formatted)
+        target_book_formatted = json.dumps(target_book)
+        response, http_status_code = update_book(target_book_formatted, new_data_formatted)
         if http_status_code != 204:
             error_message = "An internal error has occurred trying to update the book on the database."
             raise InternalServerError(description=error_message)
@@ -38,10 +37,11 @@ def update(author, title, new_data):
         raise NotFound(description=error_message)
 
 def delete(author, title):
-    target_book, http_status_code = get(author, title)
-    target_book_found = target_book and http_status_code == 200
+    target_book = get(author, title)
+    target_book_found = target_book
     if target_book_found:
-        response, http_status_code = delete_book(target_book)
+        target_book_formatted = json.dumps(target_book)
+        response, http_status_code = delete_book(target_book_formatted)
         if http_status_code != 204:
             error_message = "An internal error has occurred trying to delete the book on the database."
             raise InternalServerError(description=error_message)

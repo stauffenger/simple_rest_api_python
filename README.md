@@ -7,14 +7,16 @@ This API will be built with python and the flask-restful, an extension of the fr
 ## How will the API work?
 It'll format the data to pass for the library API.
 
-## Services provided
-- Books:
-    - Create
-    - Read
+## Services provided(path)
+- Books('http://localhost:5000/books/'):
+    - Register new book
+    - Get all books
+- A specific book('http://localhost:5000/book/author-name-separated-with-hyphen/title-separated-with-hyphen/'):
     - Update
+    - Get
     - Delete
 
-## Books model
+## Books insert/update model
 ```JSON
 {
     "title": "book title",
@@ -24,7 +26,25 @@ It'll format the data to pass for the library API.
 ```
 
 ## How to start the project
+```Shell
+$ phyton app.py
+```
+or
+```Shell
+$ flask run
+```
 
 ## Dependencies
+- flask
+- flask-restful
+- flask-cors
+- json
+- werkzeug.exceptions
+- hashlib
 
 ## References
+- https://www.geeksforgeeks.org/python-build-a-rest-api-using-flask/
+- https://flask.palletsprojects.com/en/1.1.x/
+- https://flask-restful.readthedocs.io/en/latest/
+- https://werkzeug.palletsprojects.com/en/1.0.x/
+- https://docs.python.org/2/library/hashlib.html

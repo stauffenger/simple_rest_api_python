@@ -4,8 +4,8 @@ from book import get, update, delete
 from all_books import insert, get_all
 class Book(Resource):
     def get(self, author, title): 
-        book, http_status_code = get(author, title)
-        return book, http_status_code
+        book = get(author, title)
+        return book, 200
     
     def patch(self, author, title):
         new_data= request.get_json()
@@ -23,5 +23,5 @@ class AllBooks(Resource):
         return { "message": "created" }, 201
     
     def get(self):
-        all_books, http_status_code = get_all()
-        return all_books, http_status_code
+        all_books = get_all()
+        return all_books, 200

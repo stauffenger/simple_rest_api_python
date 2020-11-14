@@ -8,7 +8,7 @@ api = Api(app)
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 api.add_resource(AllBooks, '/books/')
-api.add_resource(Book, '/book/<string:author>/<string:title>')
+api.add_resource(Book, '/book/<string:author>/<string:title>/')
 
 @app.route('/<path:string>', methods=['POST', 'GET', 'PATCH', 'DELETE']) 
 def default_message_for_wrong_paths(string): 
